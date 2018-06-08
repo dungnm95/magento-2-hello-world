@@ -40,5 +40,4 @@
 !/var/package
 /var/package/*
 !/var/package/*.xml
-/app/code/Smart
 

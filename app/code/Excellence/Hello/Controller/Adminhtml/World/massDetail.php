@@ -1,9 +1,9 @@
 <?php
-namespace Excellence\Hello\Controller\Adminhtml\Test2;
+namespace Excellence\Hello\Controller\Adminhtml\World;
 
 use Magento\Backend\App\Action;
 
-class Index extends \Magento\Backend\App\Action
+class MassDetail extends \Magento\Backend\App\Action
 {
     protected $resultPageFactory;
 

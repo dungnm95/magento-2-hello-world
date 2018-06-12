@@ -2,8 +2,8 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
         <add id="Excellence_Hello::hello" title="Hello" module="Excellence_Hello" sortOrder="15" dependsOnModule="Excellence_Hello" resource="Excellence_Hello::hello" />
-        <add id="Excellence_Hello::hello_world" title="World" module="Excellence_Hello" sortOrder="10" parent="Excellence_Hello::hello" action="hello/world" resource="Excellence_Hello::hello"/>
-        <add id="Excellence_Hello::hello_world_test1" title="Test1" module="Excellence_Hello" sortOrder="22" parent="Excellence_Hello::hello_world" action="hello/test1" resource="Excellence_Hello::hello_world_test1" />
+        <add id="Excellence_Hello::hello_world" title="World" module="Excellence_Hello" sortOrder="10" parent="Excellence_Hello::hello"  resource="Excellence_Hello::hello"/>
+        <add id="Excellence_Hello::hello_world_test1" title="Test1" module="Excellence_Hello" sortOrder="22" parent="Excellence_Hello::hello_world" action="hello/world" resource="Excellence_Hello::hello_world_test1" />
         <add id="Excellence_Hello::hello_world_test2" title="Test2" module="Excellence_Hello" sortOrder="22" parent="Excellence_Hello::hello_world" action="hello/test2" resource="Excellence_Hello::hello_world_test2" />
     </menu>
 </config>

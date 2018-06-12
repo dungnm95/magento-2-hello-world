@@ -28,7 +28,6 @@ class Main extends \Magento\Framework\View\Element\Template{
         $test->load(2);
         print_r($test->getData());
 
-        $test->delete(2);
 
         $model = $this->_testFactory->create()->load(1);
 

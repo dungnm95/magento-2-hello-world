@@ -21,7 +21,7 @@ class Predispatch implements ObserverInterface
 
     public function execute(Observer $observer)
     {
-        $this->logger->warn('Observer Works');
+        $this->logger->warning('ndlhs');
         //exit; un commet this to make sure event works
     }
 }

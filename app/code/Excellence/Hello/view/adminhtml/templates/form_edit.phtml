@@ -1,0 +1,10 @@
+<?php
+    $record = $block->getRecordInfo();
+?>
+
+<form action="/admin/hello/world/update" method="post">
+    <label>Title</label>
+    <input name="title" value="<?php echo $record['title']; ?>" />
+    <input name="id" type="hidden" value="<?php echo $record['excellence_hello_test_id']; ?>" />
+    <input type="submit" value="Update" />
+</form>

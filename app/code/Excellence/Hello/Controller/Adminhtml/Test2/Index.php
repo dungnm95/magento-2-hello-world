@@ -1,4 +1,4 @@
-<?php
+<?php$resultPageFactory
 namespace Excellence\Hello\Controller\Adminhtml\Test2;
 
 use Magento\Backend\App\Action;

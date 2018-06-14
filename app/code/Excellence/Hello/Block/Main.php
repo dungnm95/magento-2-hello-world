@@ -37,4 +37,12 @@ class Main extends \Magento\Framework\View\Element\Template{
         return $model->getData('excellence_hello_test_id');
     }
 
+    public function getRecordInfo()
+    {
+        $title = $this->getRequest()->getParams();
+        $id = (int) $title['id'];
+        $model = $this->_testFactory->create()->load($id);
+        return $model->getData();
+    }
+
 }

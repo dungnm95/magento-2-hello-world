@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- grid ui component -->
     <virtualType name="Excellence\Hello\Model\Resource\Test\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
             <argument name="mainTable" xsi:type="string">excellence_hello_test</argument>
@@ -15,4 +16,13 @@
         </arguments>
     </type>
 
+    <!--block override-->
+    <!--<type name="Magento\Catalog\Block\Product\View">
+        <plugin name="Hello-Excellence_Hello-product-block" type="Excellence\Hello\Plugin\ProductPlugin" sortOrder="5" />
+    </type>-->
+
+    <!--model override-->
+    <!--<type name="Magento\Catalog\Model\Product">
+        <plugin name="Hello-Excellence_Hello-product-model" type="Excellence\Hello\Plugin\ProductPlugin" sortOrder="1" />
+    </type>-->
 </config>

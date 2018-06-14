@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <!--<argument name="context" xsi:type="configurableObject">
+        <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\Context</argument>
+        <argument name="namespace" xsi:type="string">hello_world_grid_add</argument>
+        &lt;!&ndash; this should be same as the file name or uicomponentname &ndash;&gt;
+    </argument>-->
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">hello_world_grid_add.excellence_hello_grid_data_source</item>
+            <!-- the format here is uicomponentname.datasourcename -->
+            <item name="deps" xsi:type="string">hello_world_grid_add.excellence_hello_grid_data_source</item>
+            <!-- the format here is uicomponentname.datasourcename -->
+        </item>
+        <item name="label" xsi:type="string" translate="true">Post Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <!-- here we can add buttons -->
+            <item name="save" xsi:type="string"> Excellence\Hello\Block\Save </item>
+        </item>
+    </argument>
+    <dataSource name="excellence_hello_grid_data_source">
+        <!-- this is data source name, this is used at many places -->
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">excellence_hello_grid_data_source</argument>
+            <!-- the same data source name as above -->
+            <argument name="primaryFieldName" xsi:type="string">excellence_hello_test_id</argument>
+            <!-- our model's primary key -->
+            <argument name="requestFieldName" xsi:type="string">excellence_hello_test_id</argument>
+            <!-- the field used in ajax url's of grid. just define this as id -->
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">excellence_hello_test_id</item>
+                    </item>
+                </item>
+            </argument>
+            <!-- keep above same always -->
+        </argument>
+    </dataSource>
+    <fieldset name="employee_details">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">false</item>
+                <item name="label" xsi:type="string" translate="true">Test Details</item>
+                <item name="sortOrder" xsi:type="number">20</item>
+            </item>
+        </argument>
+        <field name="title">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Title</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">test</item>
+                    <item name="dataScope" xsi:type="string">title</item>
+                    <!--<item name="default" xsi:type="string">1</item>-->
+                </item>
+            </argument>
+        </field>
+
+    </fieldset>
+</form>

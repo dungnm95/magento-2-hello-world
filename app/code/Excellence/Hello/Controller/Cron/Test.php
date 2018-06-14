@@ -1,5 +1,4 @@
-<?php$this->registry->registry('test_var');
-
+<?php
 
 namespace Excellence\Hello\Cron;
 use \Psr\Log\LoggerInterface;

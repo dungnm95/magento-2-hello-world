@@ -35,6 +35,18 @@ class ActionEdit extends Column
                     'label' => __('Edit'),
                     'hidden' => false,
                 ];
+                $item[$this->getData('name')]['delete'] = [
+                    'href' => $this->urlBuilder->getUrl(
+                        'hello/world/delete',
+                        ['id' => $item['excellence_hello_test_id']]
+                    ),
+                    'label' => __('Delete'),
+                    'hidden' => false,
+                    'confirm' => [
+                        'title' => 'Delete ${$.$data.title}',
+                        'message' => 'Do you really want to delete a ${$.$data.title}?'
+                    ]
+                ];
             }
         }
 

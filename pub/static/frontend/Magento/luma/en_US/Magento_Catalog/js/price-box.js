@@ -1,0 +1,1 @@
+/var/www/magento2_4/app/code/Magento/Catalog/view/base/web/js/price-box.js

@@ -542,7 +542,23 @@ class Uploader
                 $tmpVar = [];
 
                 foreach ($fileAttributes as $attributeName => $attributeValue) {
-                    $tmpVar[$attributeName] = $attributeValue[$file[1]];
+//                    $tmpVar[$attributeName] = $attributeValue[$file[1]];
+                    preg_match("/^(.*?)\](.*?)\$/", $file[1], $wasMultiArray);
+                    if ( is_array($attributeValue) &&
+                        count($wasMultiArray) > 0 &&
+                        count($wasMultiArray[0]) > 0 &&
+                        count($wasMultiArray[1]) > 0 ) {
+                        $imageName = "";
+                        array_walk_recursive( $attributeValue,
+                            function ( $item, $key ) use ( &$imageName )
+                            {
+                                $imageName = $item;
+                            }
+                        );
+                        $tmpVar[$attributeName] = $imageName;
+                    }else{
+                        $tmpVar[$attributeName] = $attributeValue[$file[1]];
+                    }
                 }
 
                 $fileAttributes = $tmpVar;

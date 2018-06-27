@@ -183,7 +183,7 @@ class FilesystemTest extends TestCase
     {
         @mkdir($this->workingDir, 0777, true);
         file_put_contents($this->workingDir."/file1.txt", 'Hello');
-        file_put_contents($this->workingDir."/file2.txt", 'World');
+        file_put_contents($this->workingDir."/file2.txt", 'World_1');
 
         $fs = new Filesystem;
         $this->assertGreaterThanOrEqual(10, $fs->size($this->workingDir));

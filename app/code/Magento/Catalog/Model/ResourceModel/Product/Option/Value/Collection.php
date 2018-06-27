@@ -73,9 +73,9 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             $connection->quoteInto('store_value_price.store_id = ?', $storeId);
 
         $joinExprTitle = 'store_value_title.option_type_id = main_table.option_type_id AND ' . $connection->quoteInto(
-            'store_value_title.store_id = ?',
-            $storeId
-        );
+                'store_value_title.store_id = ?',
+                $storeId
+            );
 
         $this->getSelect()->joinLeft(
             ['default_value_price' => $optionTypePriceTable],
@@ -133,6 +133,33 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             ['store_title' => 'title', 'title' => $titleExpr]
         )->where(
             'default_value_title.store_id = ?',
+            \Magento\Store\Model\Store::DEFAULT_STORE_ID
+        );
+
+        return $this;
+    }
+
+    public function addImageToResult($storeId)
+    {
+        $optionTitleTable = $this->getTable('smart_osc_option');
+        $titleExpr = $this->getConnection()->getCheckSql(
+            'store_value_image.image IS NULL',
+            'default_value_image.image',
+            'store_value_image.image'
+        );
+
+        $joinExpr = 'store_value_image.option_type_id = main_table.option_type_id AND ' .
+            $this->getConnection()->quoteInto('store_value_image.store_id = ?', $storeId);
+        $this->getSelect()->join(
+            ['default_value_image' => $optionTitleTable],
+            'default_value_image.option_type_id = main_table.option_type_id',
+            ['default_image' => 'image']
+        )->joinLeft(
+            ['store_value_image' => $optionTitleTable],
+            $joinExpr,
+            ['store_image' => 'image', 'image' => $titleExpr]
+        )->where(
+            'default_value_image.store_id = ?',
             \Magento\Store\Model\Store::DEFAULT_STORE_ID
         );
 

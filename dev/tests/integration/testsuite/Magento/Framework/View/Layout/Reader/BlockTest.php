@@ -64,7 +64,7 @@ class BlockTest extends \PHPUnit\Framework\TestCase
             [
                 Block::ATTRIBUTE_GROUP => 'test.group',
                 Block::ATTRIBUTE_CLASS => 'Dummy\Class',
-                Block::ATTRIBUTE_TEMPLATE => 'test.phtml',
+                Block::ATTRIBUTE_TEMPLATE => 'select.phtml',
                 Block::ATTRIBUTE_TTL => 3,
                 Block::ATTRIBUTE_DISPLAY => '',
                 Block::ATTRIBUTE_ACL => '',

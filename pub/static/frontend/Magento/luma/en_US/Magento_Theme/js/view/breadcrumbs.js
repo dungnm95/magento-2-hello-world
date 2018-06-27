@@ -1,0 +1,1 @@
+/var/www/magento2_4/app/code/Magento/Theme/view/frontend/web/js/view/breadcrumbs.js

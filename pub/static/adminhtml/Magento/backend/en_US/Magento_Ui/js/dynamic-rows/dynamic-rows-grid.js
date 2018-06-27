@@ -1,0 +1,1 @@
+/var/www/magento2_4/app/code/Magento/Ui/view/base/web/js/dynamic-rows/dynamic-rows-grid.js

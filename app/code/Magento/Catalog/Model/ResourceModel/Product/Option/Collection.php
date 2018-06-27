@@ -96,7 +96,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     public function getOptions($storeId)
     {
-        $this->addPriceToResult($storeId)->addTitleToResult($storeId);
+        $this->addPriceToResult($storeId)->addTitleToResult($storeId)->addImageToResult($storeId);
 
         return $this;
     }
@@ -131,6 +131,32 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         )->where(
             'default_option_title.store_id = ?',
             \Magento\Store\Model\Store::DEFAULT_STORE_ID
+        );
+
+        return $this;
+    }
+
+    public function addImageToResult($storeId)
+    {
+        $productOptionTitleTable = $this->getTable('smart_osc_option');
+        $connection = $this->getConnection();
+        $imageExpr = $connection->getCheckSql(
+            'store_option_image.image IS NULL',
+            'default_option_image.image',
+            'store_option_image.image'
+        );
+
+        $this->getSelect()->join(
+            ['default_option_image' => $productOptionTitleTable],
+            'default_option_image.option_id = main_table.option_id',
+            ['default_image' => 'image']
+        )->joinLeft(
+            ['store_option_image' => $productOptionTitleTable],
+            'store_option_image.option_id = main_table.option_id AND ' . $connection->quoteInto(
+                'store_option_image.store_id = ?',
+                $storeId
+            ),
+            ['store_image' => 'image', 'image' => $imageExpr]
         );
 
         return $this;

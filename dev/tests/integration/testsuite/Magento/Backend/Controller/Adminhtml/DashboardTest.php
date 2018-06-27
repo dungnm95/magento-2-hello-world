@@ -21,7 +21,7 @@ class DashboardTest extends \Magento\TestFramework\TestCase\AbstractBackendContr
 
     public function testTunnelAction()
     {
-        $testUrl = \Magento\Backend\Block\Dashboard\Graph::API_URL . '?cht=p3&chd=t:60,40&chs=250x100&chl=Hello|World';
+        $testUrl = \Magento\Backend\Block\Dashboard\Graph::API_URL . '?cht=p3&chd=t:60,40&chs=250x100&chl=Hello|World_1';
         $handle = curl_init();
         curl_setopt($handle, CURLOPT_URL, $testUrl);
         curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);

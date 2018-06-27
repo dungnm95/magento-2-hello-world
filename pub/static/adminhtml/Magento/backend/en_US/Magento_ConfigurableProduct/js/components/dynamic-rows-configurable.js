@@ -1,0 +1,1 @@
+/var/www/magento2_4/app/code/Magento/ConfigurableProduct/view/adminhtml/web/js/components/dynamic-rows-configurable.js

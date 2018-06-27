@@ -86,6 +86,7 @@ class Save extends \Magento\Catalog\Controller\Adminhtml\Product
      */
     public function execute()
     {
+
         $storeId = $this->getRequest()->getParam('store', 0);
         $store = $this->getStoreManager()->getStore($storeId);
         $this->getStoreManager()->setCurrentStore($store->getCode());
@@ -96,6 +97,7 @@ class Save extends \Magento\Catalog\Controller\Adminhtml\Product
         $productAttributeSetId = $this->getRequest()->getParam('set');
         $productTypeId = $this->getRequest()->getParam('type');
         if ($data) {
+
             try {
                 $product = $this->initializationHelper->initialize(
                     $this->productBuilder->build($this->getRequest())

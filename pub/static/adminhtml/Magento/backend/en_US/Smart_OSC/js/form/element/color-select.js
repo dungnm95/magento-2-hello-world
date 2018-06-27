@@ -1,0 +1,1 @@
+/var/www/magento2_4/app/code/Smart/OSC/view/adminhtml/web/js/form/element/color-select.js

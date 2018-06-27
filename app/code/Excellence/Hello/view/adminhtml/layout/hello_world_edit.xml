@@ -1,9 +1,14 @@
 <?xml version="1.0"?>
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <referenceContainer name="left">
+        <block
+                class="Excellence\Hello\Block\Adminhtml\Post\Edit\Tabs"
+                name="excellence_test.tabs"
+        />
+    </referenceContainer>
     <referenceContainer name="content">
         <block
-                template="form_edit.phtml"
-                class="Excellence\Hello\Block\Main"
+                class="Excellence\Hello\Block\Adminhtml\Post\Edit"
                 name="excellence_test"/>
     </referenceContainer>
 </page>

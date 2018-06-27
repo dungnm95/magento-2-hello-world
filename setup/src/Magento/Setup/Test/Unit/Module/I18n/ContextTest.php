@@ -56,15 +56,15 @@ class ContextTest extends \PHPUnit\Framework\TestCase
             ],
             [
                 [Context::CONTEXT_TYPE_THEME, 'frontend/Some/theme'],
-                '/app/design/area/theme/test.phtml',
+                '/app/design/area/theme/select.phtml',
                 [
                     [Context::CONTEXT_TYPE_MODULE, []],
                     [Context::CONTEXT_TYPE_THEME, ['frontend/Some/theme' => '/app/design/area/theme']],
                 ]
             ],
             [
-                [Context::CONTEXT_TYPE_LIB, 'lib/web/module/test.phtml'],
-                '/lib/web/module/test.phtml',
+                [Context::CONTEXT_TYPE_LIB, 'lib/web/module/select.phtml'],
+                '/lib/web/module/select.phtml',
                 [
                     [Context::CONTEXT_TYPE_MODULE, []],
                     [Context::CONTEXT_TYPE_THEME, []],
@@ -135,7 +135,7 @@ class ContextTest extends \PHPUnit\Framework\TestCase
                 [Context::CONTEXT_TYPE_THEME, 'frontend/Magento/unregistered'],
                 [[ComponentRegistrar::THEME, 'frontend/Magento/unregistered', null]]
             ],
-            [BP . '/lib/web/i18n/', [Context::CONTEXT_TYPE_LIB, 'lib/web/module/test.phtml'], []],
+            [BP . '/lib/web/i18n/', [Context::CONTEXT_TYPE_LIB, 'lib/web/module/select.phtml'], []],
         ];
     }
 

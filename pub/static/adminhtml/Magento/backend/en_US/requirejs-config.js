@@ -22,71 +22,6 @@ require.config(config);
  */
 
 var config = {
-    'shim': {
-        'extjs/ext-tree': [
-            'prototype'
-        ],
-        'extjs/ext-tree-checkbox': [
-            'extjs/ext-tree',
-            'extjs/defaults'
-        ],
-        'jquery/editableMultiselect/js/jquery.editable': [
-            'jquery'
-        ]
-    },
-    'bundles': {
-        'js/theme': [
-            'globalNavigation',
-            'globalSearch',
-            'modalPopup',
-            'useDefault',
-            'loadingPopup',
-            'collapsable'
-        ]
-    },
-    'map': {
-        '*': {
-            'translateInline':      'mage/translate-inline',
-            'form':                 'mage/backend/form',
-            'button':               'mage/backend/button',
-            'accordion':            'mage/accordion',
-            'actionLink':           'mage/backend/action-link',
-            'validation':           'mage/backend/validation',
-            'notification':         'mage/backend/notification',
-            'loader':               'mage/loader_old',
-            'loaderAjax':           'mage/loader_old',
-            'floatingHeader':       'mage/backend/floating-header',
-            'suggest':              'mage/backend/suggest',
-            'mediabrowser':         'jquery/jstree/jquery.jstree',
-            'tabs':                 'mage/backend/tabs',
-            'treeSuggest':          'mage/backend/tree-suggest',
-            'calendar':             'mage/calendar',
-            'dropdown':             'mage/dropdown_old',
-            'collapsible':          'mage/collapsible',
-            'menu':                 'mage/backend/menu',
-            'jstree':               'jquery/jstree/jquery.jstree',
-            'details':              'jquery/jquery.details'
-        }
-    },
-    'deps': [
-        'js/theme',
-        'mage/backend/bootstrap',
-        'mage/adminhtml/globals'
-    ],
-    'paths': {
-        'jquery/ui': 'jquery/jquery-ui-1.9.2'
-    }
-};
-
-require.config(config);
-})();
-(function() {
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
-
-var config = {
     'waitSeconds': 0,
     'map': {
         '*': {
@@ -164,6 +99,71 @@ require.config(config);
  */
 
 var config = {
+    'shim': {
+        'extjs/ext-tree': [
+            'prototype'
+        ],
+        'extjs/ext-tree-checkbox': [
+            'extjs/ext-tree',
+            'extjs/defaults'
+        ],
+        'jquery/editableMultiselect/js/jquery.editable': [
+            'jquery'
+        ]
+    },
+    'bundles': {
+        'js/theme': [
+            'globalNavigation',
+            'globalSearch',
+            'modalPopup',
+            'useDefault',
+            'loadingPopup',
+            'collapsable'
+        ]
+    },
+    'map': {
+        '*': {
+            'translateInline':      'mage/translate-inline',
+            'form':                 'mage/backend/form',
+            'button':               'mage/backend/button',
+            'accordion':            'mage/accordion',
+            'actionLink':           'mage/backend/action-link',
+            'validation':           'mage/backend/validation',
+            'notification':         'mage/backend/notification',
+            'loader':               'mage/loader_old',
+            'loaderAjax':           'mage/loader_old',
+            'floatingHeader':       'mage/backend/floating-header',
+            'suggest':              'mage/backend/suggest',
+            'mediabrowser':         'jquery/jstree/jquery.jstree',
+            'tabs':                 'mage/backend/tabs',
+            'treeSuggest':          'mage/backend/tree-suggest',
+            'calendar':             'mage/calendar',
+            'dropdown':             'mage/dropdown_old',
+            'collapsible':          'mage/collapsible',
+            'menu':                 'mage/backend/menu',
+            'jstree':               'jquery/jstree/jquery.jstree',
+            'details':              'jquery/jquery.details'
+        }
+    },
+    'deps': [
+        'js/theme',
+        'mage/backend/bootstrap',
+        'mage/adminhtml/globals'
+    ],
+    'paths': {
+        'jquery/ui': 'jquery/jquery-ui-1.9.2'
+    }
+};
+
+require.config(config);
+})();
+(function() {
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+var config = {
     paths: {
         'customer/template': 'Magento_Customer/templates'
     },
@@ -189,6 +189,23 @@ var config = {
         '*': {
             systemMessageDialog: 'Magento_AdminNotification/system/notification',
             toolbarEntry:   'Magento_AdminNotification/toolbar_entry'
+        }
+    }
+};
+
+require.config(config);
+})();
+(function() {
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+var config = {
+    map: {
+        '*': {
+            popupWindow:            'mage/popup-window',
+            confirmRedirect:        'Magento_Security/js/confirm-redirect'
         }
     }
 };
@@ -244,39 +261,6 @@ require.config(config);
 var config = {
     map: {
         '*': {
-            popupWindow:            'mage/popup-window',
-            confirmRedirect:        'Magento_Security/js/confirm-redirect'
-        }
-    }
-};
-
-require.config(config);
-})();
-(function() {
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
-
-var config = {
-    map: {
-        '*': {
-            orderEditDialog: 'Magento_Sales/order/edit/message'
-        }
-    }
-};
-
-require.config(config);
-})();
-(function() {
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
-
-var config = {
-    map: {
-        '*': {
             rolesTree: 'Magento_User/js/roles-tree',
             deleteUserAccount: 'Magento_User/js/delete-user-account'
         }
@@ -295,6 +279,22 @@ var config = {
     map: {
         '*': {
             integration: 'Magento_Integration/js/integration'
+        }
+    }
+};
+
+require.config(config);
+})();
+(function() {
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+var config = {
+    map: {
+        '*': {
+            orderEditDialog: 'Magento_Sales/order/edit/message'
         }
     }
 };
@@ -353,7 +353,8 @@ require.config(config);
 var config = {
     map: {
         '*': {
-            transparent: 'Magento_Payment/transparent'
+            newVideoDialog:  'Magento_ProductVideo/js/new-video-dialog',
+            openVideoModal:  'Magento_ProductVideo/js/video-modal'
         }
     }
 };
@@ -369,8 +370,7 @@ require.config(config);
 var config = {
     map: {
         '*': {
-            newVideoDialog:  'Magento_ProductVideo/js/new-video-dialog',
-            openVideoModal:  'Magento_ProductVideo/js/video-modal'
+            transparent: 'Magento_Payment/transparent'
         }
     }
 };
@@ -405,30 +405,6 @@ var config = {
         '*': {
             fptAttribute: 'Magento_Weee/js/fpt-attribute'
         }
-    }
-};
-
-require.config(config);
-})();
-(function() {
-var config = {
-    'paths': {
-        'fancybox': 'Dotdigitalgroup_Email/js/node_modules/fancybox/jquery.fancybox.pack'
-    },
-    'shim': {
-        'fancybox': {
-            exports: 'fancybox',
-            'deps': ['jquery']
-        }
-    }
-};
-
-require.config(config);
-})();
-(function() {
-var config = {
-    paths: {
-        temandoShippingComponentry: 'Temando_Shipping/static/js/main'
     }
 };
 

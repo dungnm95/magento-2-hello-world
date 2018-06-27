@@ -897,7 +897,7 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
      */
     public function emogrifyPreservesCaseForAttributeValuesFromPassedInCss()
     {
-        $cssDeclaration = 'content: \'Hello World\';';
+        $cssDeclaration = 'content: \'Hello World_1\';';
         $this->subject->setHtml('<html><body><p>target</p></body></html>');
         $this->subject->setCss('p {' . $cssDeclaration . '}');
 
@@ -914,7 +914,7 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
      */
     public function emogrifyPreservesCaseForAttributeValuesFromParsedStyleBlock()
     {
-        $cssDeclaration = 'content: \'Hello World\';';
+        $cssDeclaration = 'content: \'Hello World_1\';';
         $this->subject->setHtml(
             '<html><head><style>p {' . $cssDeclaration . '}</style></head><body><p>target</p></body></html>'
         );

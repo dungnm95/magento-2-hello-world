@@ -27,7 +27,7 @@ class Attribute extends \Magento\Backend\Block\Widget
      */
     protected $_helperActionAttribute = null;
 
-    /**
+    /**Option
      * @param \Magento\Backend\Block\Template\Context $context
      * @param ActionAttribute $helperActionAttribute
      * @param array $data

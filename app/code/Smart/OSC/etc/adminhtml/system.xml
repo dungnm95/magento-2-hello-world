@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!-- /** * @author Amasty Team * @copyright Copyright (c) 2015 Amasty (http://www.amasty.com) * @package Amasty_HelloWorld */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Config/etc/system_file.xsd">
+    <system>
+        <tab id="emipro" translate="label" sortOrder="10">
+            <label>EMIPRO</label>
+        </tab>
+
+        <section id="custom_option_image" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Custom Option Image</label>
+            <tab>emipro</tab>
+            <resource>Amasty_HelloWorld::custom_option_image</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Custom Option Image</label>
+                <field id="max_img_upload" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Maximum Image Upload Size (Mb)</label>
+                    <comment>Enter Size in Mb. For example: 1</comment>
+                </field>
+                <field id="img_width" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Image Width (px)</label>
+                    <comment>Enter Width. For example: 50</comment>
+                </field>
+                <field id="img_height" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Image Height (px)</label>
+                    <comment>Enter Height. For example: 50</comment>
+                </field>
+            </group>
+        </section>
+
+    </system>
+</config>

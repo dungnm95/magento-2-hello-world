@@ -1,10 +1,10 @@
 <?php
 class MyClass
 {
-    $varName  = 'hello';
-    $var_name = 'hello';
-    $varname  = 'hello';
-    $_varName = 'hello';
+$varName  = 'hello';
+$var_name = 'hello';
+$varname  = 'hello';
+$_varName = 'hello';
 
     public $varName  = 'hello';
     public $var_name = 'hello';
@@ -24,14 +24,14 @@ class MyClass
 
 class MyClass
 {
-  function func1()
-  {
-    function func2()
+    function func1()
     {
-     return $a;
+        function func2()
+        {
+            return $a;
+        }
+        return $data;
     }
-    return $data;
-  }
 }
 
 class MyClass
@@ -43,8 +43,8 @@ class MyClass
 if (true) {
     class MyClass
     {
-        $varName  = 'hello';
-        $var_name = 'hello';
+    $varName  = 'hello';
+    $var_name = 'hello';
     }
 }
 
@@ -59,17 +59,17 @@ class MyClass {
 }
 
 class mpgResponse{
-   var $term_id;
-   var $currentTag;
-   function characterHandler($parser,$data){
-       switch($this->currentTag)
-       {
-           case "term_id": {
-               $this->term_id=$data;
-               break;
-           }
-       }
-   }//end characterHandler
+    var $term_id;
+    var $currentTag;
+    function characterHandler($parser,$data){
+        switch($this->currentTag)
+        {
+            case "term_id": {
+                $this->term_id=$data;
+                break;
+            }
+        }
+    }//end characterHandler
 }//end class mpgResponse
 
 class foo
@@ -98,4 +98,4 @@ $util->setLogger(
     new class {
         private $varName  = 'hello';
         private $_varName = 'hello';
-});
+    });

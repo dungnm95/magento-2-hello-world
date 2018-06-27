@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Catalog\Block\Adminhtml\Product\Edit\Tab\Options\Option" type="Smart\OSC\Block\Adminhtml\Product\Edit\Tab\Options\Option"/>
+    <!--<preference for="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\CustomOptions"-->
+                <!--type="Smart\OSC\Ui\DataProvider\Product\Form\Modifier\CustomOptions" />-->
+    <!--<preference for="Magento\Catalog\Model\Product\Option" type="Smart\OSC\Model\Catalog\Product\Option"/>-->
+    <type name="Smart\OSC\Model\ImageUploader">
+        <arguments>
+            <!-- Temporary file stored in pub/media/faq/tmp/icon -->
+            <argument name="baseTmpPath" xsi:type="string">option/tmp/icon</argument>
+            <argument name="basePath" xsi:type="string">option/icon</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

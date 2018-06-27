@@ -29,17 +29,6 @@ interface ProductExtensionInterface extends \Magento\Framework\Api\ExtensionAttr
     public function setCategoryLinks($categoryLinks);
 
     /**
-     * @return \Magento\Bundle\Api\Data\OptionInterface[]|null
-     */
-    public function getBundleProductOptions();
-
-    /**
-     * @param \Magento\Bundle\Api\Data\OptionInterface[] $bundleProductOptions
-     * @return $this
-     */
-    public function setBundleProductOptions($bundleProductOptions);
-
-    /**
      * @return \Magento\CatalogInventory\Api\Data\StockItemInterface|null
      */
     public function getStockItem();
@@ -51,26 +40,15 @@ interface ProductExtensionInterface extends \Magento\Framework\Api\ExtensionAttr
     public function setStockItem(\Magento\CatalogInventory\Api\Data\StockItemInterface $stockItem);
 
     /**
-     * @return \Magento\ConfigurableProduct\Api\Data\OptionInterface[]|null
+     * @return \Magento\Bundle\Api\Data\OptionInterface[]|null
      */
-    public function getConfigurableProductOptions();
+    public function getBundleProductOptions();
 
     /**
-     * @param \Magento\ConfigurableProduct\Api\Data\OptionInterface[] $configurableProductOptions
+     * @param \Magento\Bundle\Api\Data\OptionInterface[] $bundleProductOptions
      * @return $this
      */
-    public function setConfigurableProductOptions($configurableProductOptions);
-
-    /**
-     * @return int[]|null
-     */
-    public function getConfigurableProductLinks();
-
-    /**
-     * @param int[] $configurableProductLinks
-     * @return $this
-     */
-    public function setConfigurableProductLinks($configurableProductLinks);
+    public function setBundleProductOptions($bundleProductOptions);
 
     /**
      * @return \Magento\Downloadable\Api\Data\LinkInterface[]|null
@@ -93,4 +71,26 @@ interface ProductExtensionInterface extends \Magento\Framework\Api\ExtensionAttr
      * @return $this
      */
     public function setDownloadableProductSamples($downloadableProductSamples);
+
+    /**
+     * @return \Magento\ConfigurableProduct\Api\Data\OptionInterface[]|null
+     */
+    public function getConfigurableProductOptions();
+
+    /**
+     * @param \Magento\ConfigurableProduct\Api\Data\OptionInterface[] $configurableProductOptions
+     * @return $this
+     */
+    public function setConfigurableProductOptions($configurableProductOptions);
+
+    /**
+     * @return int[]|null
+     */
+    public function getConfigurableProductLinks();
+
+    /**
+     * @param int[] $configurableProductLinks
+     * @return $this
+     */
+    public function setConfigurableProductLinks($configurableProductLinks);
 }

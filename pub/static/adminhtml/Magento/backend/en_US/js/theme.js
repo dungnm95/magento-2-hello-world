@@ -1,0 +1,1 @@
+/var/www/magento2_4/app/design/adminhtml/Magento/backend/web/js/theme.js

@@ -1,0 +1,63 @@
+<script id="custom-option-select-type-template" type="text/x-magento-template">
+    <div id="product_option_<%- data.option_id %>_type_<%- data.group %>" class="fieldset">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th class="type-title required"><?php echo __('Title'); ?></th>
+                    <th class="type-price required"><?php echo __('Price'); ?></th>
+                    <th class="type-price-type"><?php echo __('Price Type'); ?></th>
+                    <th class="type-sku"><?php echo __('SKU'); ?></th>
+                    <th class="type-image"><?php echo __('Image'); ?></th>
+                    <th class="type-upload"><?php echo __('Upload'); ?></th>
+                    <th class="type-thumb-color"><?php echo __('Thumb Color'); ?></th>
+                    <th class="type-display-mode"><?php echo __('Display Mode'); ?></th>
+                    <th class="type-is-default"><?php echo __('Is Default'); ?></th>
+                    <th class="col-actions">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody id="select_option_type_row_<%- data.option_id %>"></tbody>
+            <tfoot>
+            <tr>
+                <td colspan="10"><?= $block->getAddButtonHtml() ?>
+                    <input name="validation_<%- data.option_id %>_result" class="required-option-select-type-rows" type="hidden" value="">
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</script>
+<script id="custom-option-select-type-row-template" type="text/x-magento-template">
+    <tr id="product_option_<%- data.id %>_select_<%- data.select_id %>">
+        <td class="col-name select-opt-title">
+            <input name="product[options][<%- data.option_id %>][title]" class="input-text" type="text" value="<%- data.title %>" />
+        </td>
+        <td class="col-price select-opt-price">
+            <input name="product[options][<%- data.option_id %>][price]" class="input-text" type="text" value="<%- data.price %>" />
+        </td>
+        <td class="col-price-type select-opt-price-type">
+            <?php echo $block->getPriceTypeSelectHtml('data-attr="price-type"'); ?> <%- data.checkboxScopePrice %>
+        </td>
+        <td class="col-sku">
+            <input name="product[options][<%- data.option_id %>][sku]" class="input-text" type="text" value="<%- data.sku %>" />
+        </td>
+        <td>
+            <img src="http://www.redfalconint.com/wp-content/plugins/our-services-showcas/inc/img/noprofile.jpg" width="10" />
+        </td>
+        <td class="col-image">
+            <input name="product[options][<%- data.option_id %>][image]" class="input-file" type="file" />
+        </td>
+        <td class="col-thumb-color">
+            <input name="product[options][<%- data.option_id %>][thumb-color]" class="input-text" type="color" />
+        </td>
+        <td class="col-display-mode">
+            <select name="product[options][<%- data.option_id %>][display-mode]">
+                <option value="image"><?php echo __('Image'); ?></option>
+                <option value="color"><?php echo __('Color'); ?></option>
+            </select>
+        </td>
+        <td class="col-is-default">
+            <input name="product[options][<%- data.option_id %>][is-default]" class="input-checkbox" type="checkbox" />
+        </td>
+        <td class="col-actions col-delete"> <?= $block->getDeleteButtonHtml() ?></td>
+    </tr>
+</script>

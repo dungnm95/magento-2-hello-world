@@ -115,10 +115,10 @@ class CredisTest extends PHPUnit_Framework_TestCase
     public function testSets()
     {
         // Multiple arguments
-        $this->assertEquals(2, $this->credis->sAdd('myset', 'Hello', 'World'));
+        $this->assertEquals(2, $this->credis->sAdd('myset', 'Hello', 'World_1'));
 
         // Array Arguments
-        $this->assertEquals(1, $this->credis->sAdd('myset', array('Hello','Cruel','World')));
+        $this->assertEquals(1, $this->credis->sAdd('myset', array('Hello','Cruel','World_1')));
 
         // Non-empty set
         $members = $this->credis->sMembers('myset');
@@ -132,7 +132,7 @@ class CredisTest extends PHPUnit_Framework_TestCase
     public function testSortedSets()
     {
         $this->assertEquals(1, $this->credis->zAdd('myset', 1, 'Hello'));
-        $this->assertEquals(1, $this->credis->zAdd('myset', 2.123, 'World'));
+        $this->assertEquals(1, $this->credis->zAdd('myset', 2.123, 'World_1'));
         $this->assertEquals(1, $this->credis->zAdd('myset', 10, 'And'));
         $this->assertEquals(1, $this->credis->zAdd('myset', 11, 'Goodbye'));
 
@@ -141,13 +141,13 @@ class CredisTest extends PHPUnit_Framework_TestCase
 
         $range = $this->credis->zRangeByScore('myset', '-inf', '+inf', array('limit' => array(1, 2)));
         $this->assertEquals(2, count($range));
-        $this->assertEquals('World', $range[0]);
+        $this->assertEquals('World_1', $range[0]);
         $this->assertEquals('And', $range[1]);
 
         $range = $this->credis->zRangeByScore('myset', '-inf', '+inf', array('withscores' => true, 'limit' => array(1, 2)));
         $this->assertEquals(2, count($range));
-        $this->assertTrue(array_key_exists('World', $range));
-        $this->assertEquals(2.123, $range['World']);
+        $this->assertTrue(array_key_exists('World_1', $range));
+        $this->assertEquals(2.123, $range['World_1']);
         $this->assertTrue(array_key_exists('And', $range));
         $this->assertEquals(10, $range['And']);
 
@@ -207,10 +207,10 @@ class CredisTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(0, $this->credis->hSet('hash','field1','foo'));
         $this->assertEquals('foo', $this->credis->hGet('hash','field1'));
         $this->assertEquals(NULL, $this->credis->hGet('hash','x'));
-        $this->assertTrue($this->credis->hMSet('hash', array('field2' => 'Hello', 'field3' => 'World')));
+        $this->assertTrue($this->credis->hMSet('hash', array('field2' => 'Hello', 'field3' => 'World_1')));
         $this->assertEquals(array('foo','Hello',FALSE), $this->credis->hMGet('hash', array('field1','field2','nilfield')));
         $this->assertEquals(array(), $this->credis->hGetAll('nohash'));
-        $this->assertEquals(array('field1' => 'foo', 'field2' => 'Hello', 'field3' => 'World'), $this->credis->hGetAll('hash'));
+        $this->assertEquals(array('field1' => 'foo', 'field2' => 'Hello', 'field3' => 'World_1'), $this->credis->hGetAll('hash'));
 
         // Test long hash values
         $longString = str_repeat(md5('asd'), 4096); // 128k (redis.h REDIS_INLINE_MAX_SIZE = 64k)

@@ -1,0 +1,1 @@
+/var/www/magento2_4/app/code/Magento/Downloadable/view/adminhtml/web/js/components/is-downloadable-handler.js

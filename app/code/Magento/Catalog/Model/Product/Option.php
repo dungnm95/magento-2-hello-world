@@ -37,7 +37,7 @@ class Option extends AbstractExtensibleModel implements ProductCustomOptionInter
     protected $optionRepository;
 
     /**
-     * Option type percent
+     * Option type percent0
      * @since 101.0.0
      */
     protected static $typePercent = 'percent';

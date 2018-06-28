@@ -173,7 +173,13 @@ class Select extends \Magento\Catalog\Block\Product\View\Options\AbstractOptions
                     $_option->getId() .
                     '_' .
                     $count .
-                    '"><span style="width:40px;height:40px;background-color: #0F6AB4;display:inline-block"></span></label>';
+                    '">';
+                if($_option->getDataByColumn('display_mode') == 'image'){
+                    $selectHtml .= '<img src="'.$_option->getDataByColumn("image").'" width="40" height="40"/></label>';
+                }else{
+                    $selectHtml .= '<span style="width:40px;height:40px;background-color: #'.$_option->getDataByColumn("thumb_color").';display:inline-block"></span></label>';
+                }
+
                 $selectHtml .= '</div>';
             }
             $selectHtml .= '</div>';

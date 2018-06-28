@@ -152,6 +152,8 @@ class CustomOptions extends \Magento\Catalog\Ui\DataProvider\Product\Form\Modifi
      */
     private $localeCurrency;
 
+    protected $_optionFactory;
+
     /**
      * @param LocatorInterface $locator
      * @param StoreManagerInterface $storeManager
@@ -166,7 +168,8 @@ class CustomOptions extends \Magento\Catalog\Ui\DataProvider\Product\Form\Modifi
         ConfigInterface $productOptionsConfig,
         ProductOptionsPrice $productOptionsPrice,
         UrlInterface $urlBuilder,
-        ArrayManager $arrayManager
+        ArrayManager $arrayManager,
+        \Smart\OSC\Model\OptionFactory $optionFactory
     ) {
         $this->locator = $locator;
         $this->storeManager = $storeManager;
@@ -174,6 +177,7 @@ class CustomOptions extends \Magento\Catalog\Ui\DataProvider\Product\Form\Modifi
         $this->productOptionsPrice = $productOptionsPrice;
         $this->urlBuilder = $urlBuilder;
         $this->arrayManager = $arrayManager;
+        $this->_optionFactory = $optionFactory;
     }
 
     /**
@@ -229,9 +233,8 @@ class CustomOptions extends \Magento\Catalog\Ui\DataProvider\Product\Form\Modifi
     }
 
     protected function getExtraCustomOption($option_id){
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $optionModel = $objectManager->create('Smart\OSC\Model\Option');
-        $optionModel->load($option_id);
+        $optionModel = $this->_optionFactory->create();
+        $optionModel->loadByOptionId($option_id);
         return $optionModel->get();
     }
 

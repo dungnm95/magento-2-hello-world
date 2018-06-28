@@ -13,17 +13,17 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
         $table = $installer->getConnection()->newTable(
             $installer->getTable('smart_osc_option')
         )->addColumn(
-            'option_id',
+            'id',
             \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
             null,
             [ 'identity' => true, 'nullable' => false, 'primary' => true, 'unsigned' => true, ],
             'Entity ID'
         )->addColumn(
-            'product_id',
+            'option_id',
             \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
-            10,
-            [ 'nullable' => false, 'unsigned' => true, 'default' => '0'],
-            'Product ID'
+            null,
+            [ 'identity' => true, 'nullable' => false, 'unsigned' => true, ],
+            'Entity ID'
         )->addColumn(
             'type',
             \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,

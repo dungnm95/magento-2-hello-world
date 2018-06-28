@@ -12,6 +12,7 @@ use Magento\Catalog\Controller\Adminhtml\Product;
 use Magento\Checkout\Exception;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\App\Request\DataPersistorInterface;
+use Smart\OSC\Model\OptionFactory;
 
 /**
  * Class Save
@@ -53,6 +54,7 @@ class Save extends \Magento\Catalog\Controller\Adminhtml\Product
     private $storeManager;
 
     public $imageUploader;
+    protected $_optionFactory;
 
     /**
      * Save constructor.
@@ -65,14 +67,17 @@ class Save extends \Magento\Catalog\Controller\Adminhtml\Product
      * @param \Magento\Catalog\Api\ProductRepositoryInterface $productRepository
      */
     public function __construct(
+      //
         \Magento\Backend\App\Action\Context $context,
         Product\Builder $productBuilder,
         \Magento\Catalog\Controller\Adminhtml\Product\Initialization\Helper $initializationHelper,
         \Magento\Catalog\Model\Product\Copier $productCopier,
         \Magento\Catalog\Model\Product\TypeTransitionManager $productTypeManager,
-        \Magento\Catalog\Api\ProductRepositoryInterface $productRepository
+        \Magento\Catalog\Api\ProductRepositoryInterface $productRepository,
+        \Smart\OSC\Model\OptionFactory $optionFactory
     )
     {
+        $this->_optionFactory = $optionFactory;
         $this->initializationHelper = $initializationHelper;
         $this->productCopier = $productCopier;
         $this->productTypeManager = $productTypeManager;
@@ -100,38 +105,47 @@ class Save extends \Magento\Catalog\Controller\Adminhtml\Product
         $productAttributeSetId = $this->getRequest()->getParam('set');
         $productTypeId = $this->getRequest()->getParam('type');
         if ($data) {
+            if (isset($data['product']['options'])) {
+                $options = $data['product']['options'];
+                if ($options) {
+                    foreach ($options as $options_key => $options_val) {
+                        if (isset($options_val['values'])) {
+                            foreach ($options_val['values'] as $values_key => $values_val) {
+                                $data_option = [
+                                    'option_id' => $options_val['option_id'],
+                                    'type' => $options_val['type'],
+                                    'is_require' => $options_val['is_require'],
+                                    'sku' => $values_val['sku'],
+                                    'display_mode' => $values_val['display_mode'],
+                                    'is_default' => $values_val['is_default'],
+                                    'sort_order' => $options_key + $values_key
+                                ];
+                                if ($values_val['display_mode'] == 'image') {
+                                    $data_option['image'] = isset($values_val['upload'][0]['url']) ? $values_val['upload'][0]['url'] : $values_val['image'];
+                                    $data_option['thumb_color'] = '';
+                                } else {
+                                    $data_option['image'] = '';
+                                    $data_option['thumb_color'] = $values_val['thumb_color'];
+                                }
 
-            $options = $data['product']['options'];
-            if ($options) {
-                foreach ($options as $options_key => $options_val) {
-                    if (isset($options_val['values'])) {
-                        foreach ($options_val['values'] as $values_key => $values_val) {
-                            $data_option = [
-                                'option_id' => $options_val['option_id'],
-                                'product_id' => $options[0]['product_id'],
-                                'type' => $options_val['type'],
-                                'is_require' => $options_val['is_require'],
-                                'sku' => $values_val['sku'],
-                                'display_mode' => $values_val['display_mode'],
-                                'is_default' => $values_val['is_default'],
-                                'sort_order' => $options_key + $values_key
-                            ];
-                            if ($values_val['display_mode'] == 'image') {
-                                $data_option['image'] = isset($values_val['upload'][0]['url']) ? $values_val['upload'][0]['url'] : $values_val['image'];
-                                $data_option['thumb_color'] = '';
-                            } else {
-                                $data_option['image'] = '';
-                                $data_option['thumb_color'] = $values_val['thumb_color'];
+                                $model = $this->_optionFactory->create();
+
+
+                                try {
+                                    $model->setData($data_option);
+                                    $model->save();
+                                } catch (Exception $e) {
+                                    $this->_objectManager->get(\Psr\Log\LoggerInterface::class)->critical($e);
+                                    $this->messageManager->addErrorMessage($e->getMessage());
+                                }
+
                             }
-                            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-                            $optionModel = $objectManager->create('Smart\OSC\Model\Option');
-                            $optionModel->setData($data_option);
-                            $optionModel->save();
                         }
-                    }
 
+                    }
                 }
             }
+
             try {
                 $product = $this->initializationHelper->initialize(
                     $this->productBuilder->build($this->getRequest())

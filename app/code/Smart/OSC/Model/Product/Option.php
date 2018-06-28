@@ -36,6 +36,12 @@ class Option extends \Magento\Catalog\Model\Product\Option implements ProductCus
     const KEY_PRODUCT_DISPLAY_MODE = 'display_mode';
     const KEY_PRODUCT_IS_DEFAULT = 'is_default';
 
+    protected function _construct()
+    {
+        $this->_init(\Smart\OSC\Model\ResourceModel\Option::class);
+        parent::_construct();
+    }
+
     public function getGroupByType($type = null)
     {
         if ($type === null) {
@@ -85,6 +91,13 @@ class Option extends \Magento\Catalog\Model\Product\Option implements ProductCus
         return $this->setData(self::KEY_PRODUCT_DISPLAY_MODE, $display_mode);
     }
 
+    public function getDataByColumn($col)
+    {
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $optionModel = $objectManager->create('Smart\OSC\Model\Option');
+        $a = $optionModel->load($this->getId())->get();
+        return $a[$col];
+    }
     public function getImage()
     {
         return $this->_getData(self::KEY_PRODUCT_IMAGE);

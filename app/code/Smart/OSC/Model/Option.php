@@ -13,4 +13,14 @@ class Option extends \Magento\Framework\Model\AbstractModel implements \Smart\OS
     {
         return [self::CACHE_TAG . '_' . $this->getId()];
     }
+
+    public function loadByOptionId($option_id)
+    {
+//        if(!$option_id){
+//            $option_id = $this->getTitle();
+//        }
+        $id = $this -> getResource()->loadByOptionId($option_id);
+        return $this->load($id);
+
+    }
 }

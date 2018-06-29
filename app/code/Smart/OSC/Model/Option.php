@@ -23,4 +23,14 @@ class Option extends \Magento\Framework\Model\AbstractModel implements \Smart\OS
         return $this->load($id);
 
     }
+
+    public function loadAllByOptionId($option_id){
+        $array = $this -> getResource()->loadAllByOptionId($option_id);
+        return $array;
+    }
+
+    public function getOptionByProduct($product_id){
+        $array = $this -> getResource()->getOptionByProductId($product_id);
+        return $array;
+    }
 }

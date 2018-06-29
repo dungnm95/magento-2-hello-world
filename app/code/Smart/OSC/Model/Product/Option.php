@@ -91,12 +91,17 @@ class Option extends \Magento\Catalog\Model\Product\Option implements ProductCus
         return $this->setData(self::KEY_PRODUCT_DISPLAY_MODE, $display_mode);
     }
 
-    public function getDataByColumn($col)
+    public function getDataByColumn($col,$option_id, $key)
     {
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $optionModel = $objectManager->create('Smart\OSC\Model\Option');
-        $a = $optionModel->load($this->getId())->get();
-        return $a[$col];
+        $a = $optionModel->loadAllByOptionId($option_id);
+        $info = [];
+        foreach ($a as $value){
+            $id = $value['id'] * 1;
+            $info [] = $optionModel->load($id)->get();
+        }
+        return $info[$key][$col];
     }
     public function getImage()
     {

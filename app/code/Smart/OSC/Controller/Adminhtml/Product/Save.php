@@ -67,7 +67,7 @@ class Save extends \Magento\Catalog\Controller\Adminhtml\Product
      * @param \Magento\Catalog\Api\ProductRepositoryInterface $productRepository
      */
     public function __construct(
-      //
+        //
         \Magento\Backend\App\Action\Context $context,
         Product\Builder $productBuilder,
         \Magento\Catalog\Controller\Adminhtml\Product\Initialization\Helper $initializationHelper,
@@ -94,7 +94,6 @@ class Save extends \Magento\Catalog\Controller\Adminhtml\Product
      */
     public function execute()
     {
-
         $storeId = $this->getRequest()->getParam('store', 0);
         $store = $this->getStoreManager()->getStore($storeId);
         $this->getStoreManager()->setCurrentStore($store->getCode());
@@ -105,46 +104,7 @@ class Save extends \Magento\Catalog\Controller\Adminhtml\Product
         $productAttributeSetId = $this->getRequest()->getParam('set');
         $productTypeId = $this->getRequest()->getParam('type');
         if ($data) {
-            if (isset($data['product']['options'])) {
-                $options = $data['product']['options'];
-                if ($options) {
-                    foreach ($options as $options_key => $options_val) {
-                        if (isset($options_val['values'])) {
-                            foreach ($options_val['values'] as $values_key => $values_val) {
-                                $data_option = [
-                                    'option_id' => $options_val['option_id'],
-                                    'type' => $options_val['type'],
-                                    'is_require' => $options_val['is_require'],
-                                    'sku' => $values_val['sku'],
-                                    'display_mode' => $values_val['display_mode'],
-                                    'is_default' => $values_val['is_default'],
-                                    'sort_order' => $options_key + $values_key
-                                ];
-                                if ($values_val['display_mode'] == 'image') {
-                                    $data_option['image'] = isset($values_val['upload'][0]['url']) ? $values_val['upload'][0]['url'] : $values_val['image'];
-                                    $data_option['thumb_color'] = '';
-                                } else {
-                                    $data_option['image'] = '';
-                                    $data_option['thumb_color'] = $values_val['thumb_color'];
-                                }
 
-                                $model = $this->_optionFactory->create();
-
-
-                                try {
-                                    $model->setData($data_option);
-                                    $model->save();
-                                } catch (Exception $e) {
-                                    $this->_objectManager->get(\Psr\Log\LoggerInterface::class)->critical($e);
-                                    $this->messageManager->addErrorMessage($e->getMessage());
-                                }
-
-                            }
-                        }
-
-                    }
-                }
-            }
 
             try {
                 $product = $this->initializationHelper->initialize(
@@ -184,6 +144,7 @@ class Save extends \Magento\Catalog\Controller\Adminhtml\Product
                         )
                     );
                 }
+
                 $this->_eventManager->dispatch(
                     'controller_action_catalog_product_save_entity_after',
                     ['controller' => $this, 'product' => $product]
@@ -192,6 +153,56 @@ class Save extends \Magento\Catalog\Controller\Adminhtml\Product
                 if ($redirectBack === 'duplicate') {
                     $newProduct = $this->productCopier->copy($product);
                     $this->messageManager->addSuccessMessage(__('You duplicated the product.'));
+                }
+                $optionModel = $this->_optionFactory->create();
+                $options_1 = $optionModel->getOptionByProduct($product->getId());
+//                echo '<pre>'; print_r($options_1); die();
+                if (isset($data['product']['options'])) {
+                    $options = $data['product']['options'];
+                    if ($options) {
+                        foreach ($options as $options_key => $options_val) {
+                            $options_val['option_id'] = $options_1[$options_key]['option_id'];
+                            if (isset($options_val['values'])) {
+                                foreach ($options_val['values'] as $values_key => $values_val) {
+                                    $data_option = [
+                                        'option_id' => $options_val['option_id'],
+                                        'type' => $options_val['type'],
+                                        'is_require' => $options_val['is_require'],
+                                        'sku' => $values_val['sku'],
+                                        'display_mode' => $values_val['display_mode'],
+                                        'is_default' => $values_val['is_default'],
+                                        'sort_order' => $options_key + $values_key
+                                    ];
+                                    if ($values_val['display_mode'] == 'image') {
+                                        $data_option['image'] = isset($values_val['upload'][0]['url']) ? $values_val['upload'][0]['url'] : $values_val['image'];
+                                        $data_option['thumb_color'] = '';
+                                    } else {
+                                        $data_option['image'] = '';
+                                        $data_option['thumb_color'] = $values_val['thumb_color'];
+                                    }
+
+                                    if (isset($values_val['id'])) {
+                                        $data_option['id'] = $values_val['id'];
+                                    }
+
+                                    $model = $this->_optionFactory->create();
+
+
+                                    try {
+                                        $model->setData($data_option);
+                                        $model->save();
+
+                                    } catch (Exception $e) {
+                                        $this->_objectManager->get(\Psr\Log\LoggerInterface::class)->critical($e);
+                                        $this->messageManager->addErrorMessage($e->getMessage());
+                                    }
+
+                                }
+                            }
+
+                        }
+                    }
+
                 }
             } catch (\Magento\Framework\Exception\LocalizedException $e) {
                 $this->_objectManager->get(\Psr\Log\LoggerInterface::class)->critical($e);

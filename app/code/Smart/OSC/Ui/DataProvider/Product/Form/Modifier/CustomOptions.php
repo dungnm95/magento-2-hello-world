@@ -209,10 +209,15 @@ class CustomOptions extends \Magento\Catalog\Ui\DataProvider\Product\Form\Modifi
                 );
             }
             if(isset($options[$index][static::GRID_TYPE_SELECT_NEW_NAME])){
+                $count = 0;
                 foreach ($options[$index][static::GRID_TYPE_SELECT_NEW_NAME] as $custom_option_key => $custom_option){
                     $option_id = $custom_option['option_id'];
-                    $extra_array = $this->getExtraCustomOption($option_id);
-                    $options[$index][static::GRID_TYPE_SELECT_NEW_NAME][$custom_option_key] += $extra_array;
+                    $array_extr =  $this->getExtraCustomOption($option_id);
+                    if(!empty($array_extr)){
+                        $extra_array = $array_extr[$count];
+                        $options[$index][static::GRID_TYPE_SELECT_NEW_NAME][$custom_option_key] += $extra_array;
+                    }
+                    $count ++;
                 }
             }
 
@@ -234,8 +239,13 @@ class CustomOptions extends \Magento\Catalog\Ui\DataProvider\Product\Form\Modifi
 
     protected function getExtraCustomOption($option_id){
         $optionModel = $this->_optionFactory->create();
-        $optionModel->loadByOptionId($option_id);
-        return $optionModel->get();
+        $a = $optionModel->loadAllByOptionId($option_id);
+        $info = [];
+        foreach ($a as $value){
+            $id = $value['id'] * 1;
+            $info [] = $optionModel->load($id)->get();
+        }
+        return $info;
     }
 
     /**

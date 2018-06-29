@@ -120,16 +120,9 @@ class Select extends \Magento\Catalog\Block\Product\View\Options\AbstractOptions
             }
 
             $count = 1;
+//            echo '<pre>'; print_r($_option->getId()); die();
             foreach ($_option->getValues() as $_value) {
                 $count++;
-
-                $priceStr = $this->_formatPrice(
-                    [
-                        'is_percent' => $_value->getPriceType() == 'percent',
-                        'pricing_value' => $_value->getPrice($_value->getPriceType() == 'percent'),
-                    ]
-                );
-
                 $htmlValue = $_value->getOptionTypeId();
                 if ($arraySign) {
                     $checked = is_array($configValue) && in_array($htmlValue, $configValue) ? 'checked' : '';
@@ -174,10 +167,10 @@ class Select extends \Magento\Catalog\Block\Product\View\Options\AbstractOptions
                     '_' .
                     $count .
                     '">';
-                if($_option->getDataByColumn('display_mode') == 'image'){
-                    $selectHtml .= '<img src="'.$_option->getDataByColumn("image").'" width="40" height="40"/></label>';
+                if($_option->getDataByColumn('display_mode',$_option->getId(), $count-2) == 'image'){
+                    $selectHtml .= '<img src="'.$_option->getDataByColumn("image",$_option->getId(), $count-2).'" width="40" height="40"/></label>';
                 }else{
-                    $selectHtml .= '<span style="width:40px;height:40px;background-color: #'.$_option->getDataByColumn("thumb_color").';display:inline-block"></span></label>';
+                    $selectHtml .= '<span style="width:40px;height:40px;background-color: #'.$_option->getDataByColumn("thumb_color",$_option->getId(), $count-2).';display:inline-block"></span></label>';
                 }
 
                 $selectHtml .= '</div>';

@@ -124,6 +124,7 @@ class Select extends \Magento\Catalog\Block\Product\View\Options\AbstractOptions
             foreach ($_option->getValues() as $_value) {
                 $count++;
                 $htmlValue = $_value->getOptionTypeId();
+                $checked = '';
                 if ($arraySign) {
                     $checked = is_array($configValue) && in_array($htmlValue, $configValue) ? 'checked' : '';
                 } else {
@@ -133,6 +134,13 @@ class Select extends \Magento\Catalog\Block\Product\View\Options\AbstractOptions
                 $dataSelector = 'options[' . $_option->getId() . ']';
                 if ($arraySign) {
                     $dataSelector .= '[' . $htmlValue . ']';
+                }
+
+                $is_default = $_option->getDataByColumn("is_default",$_option->getId(), $count-2);
+                if($is_default){
+                    $checked = 'checked';
+                }else{
+                    $checked = '';
                 }
 
                 $selectHtml .= '<div class="field choice admin__field admin__field-option' .
